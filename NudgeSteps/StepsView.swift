@@ -14,7 +14,6 @@ struct StepsView: View {
     @State private var steps: [Step] = [Step]()
     @State var todayStep: CGFloat = 0
     @State var steps2: [CGFloat] = Array(repeating : 0, count : 7)
-    let compareStep = CGFloat.random(in: -500..<501)
     @State private var refresh: Bool = false
     @AppStorage("aimStep") var aimStep = 10000
 
@@ -24,9 +23,6 @@ struct StepsView: View {
     
     private func updateUIFromStatistics(_ statisticsCollection: HKStatisticsCollection) {
         
-        //            let startDate = Calendar.current.date(byAdding: .day, value: -1, to: Date())!
-        
-        //        let startDate = Calendar.current.startOfDay(for: Date())
         let startDate = Calendar.current.date(byAdding: .day, value: -7, to: Date())!
         
         let endDate = Date()
@@ -59,14 +55,13 @@ struct StepsView: View {
                     VStack {
                         Text("\(Int(steps2[0]))")
                             .animation(.default, value: steps2[0])
-                        //                    .font(.system(size: 40))
                             .font(.largeTitle)
                         
                         Text("Steps")
                             .foregroundColor(.secondary)
                     }
                 }
-                // 歩数の取得方法を揃えたほうがいい、多分以下の取得方法のほうがよい
+
                 NavigationView {
                     List(steps, id: \.id) { step in
                         VStack(alignment: .leading) {
